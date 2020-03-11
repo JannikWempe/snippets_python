@@ -53,6 +53,19 @@ def run_n_times(n):
         return wrapper_inner_run_n_times_inner
     return wrapper_outer_run_n_times
 
+def memoize(func):
+    print(f'...running memoize...')
+    cache = {}
+    @functools.wraps(func)
+    def wrapper_memoize(*args):
+        print(f'...running wrapper_memoize...')
+        if args in cache:
+            return cache[args]
+        result = func(*args)
+        cache[args] = result
+        return result
+    return wrapper_memoize
+
 # ####### BELOW SOME TESTS ########
 
 @document_it
